@@ -83,7 +83,9 @@ def main():
         text = st.text_area("Enter the text to recognize entities")
         if st.button("Recognize"):
             doc = nlp(text)
-            st.write([(ent.text, ent.label_) for ent in doc.ents])
+            spacy.displacy.render(doc, style="ent", jupyter=False)
+            st.pyplot()
+            
 
 if __name__ == "__main__":
     main()
