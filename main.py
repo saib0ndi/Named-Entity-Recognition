@@ -45,10 +45,8 @@ def main():
         st.write("Named Entity Recognition (NER) is a natural language processing technique that involves identifying and categorizing named entities in unstructured text data. Named entities can be people, places, organizations, dates, times, and more. NER is an important component of many text analysis tasks, including information retrieval, information extraction, and text classification. It is widely used in fields such as finance, healthcare, and social media analysis")
 
         st.markdown("<h4 '>Features:</h4>", unsafe_allow_html=True)
-        st.write("Easy Detection of diseases in leafs: Just need to click and upload leaf image.")
-        st.write("Fast and Accurate: Provides the disease with high accuracy and fast")
-        st.write("Cause and Solution of diseases: Provides the cause and solution of the disease")
-        st.write('Large Plant Support: Supports 38 different plants')
+        st.write("Easy Detection of Entities in text: Just need to enter the text.")
+        st.write("Fast and Accurate: Provides the entity with high accuracy and fast")
 
         # list of plants we can detect
         st.markdown("<h4  '>List of types we can identify</h4>", unsafe_allow_html=True)
