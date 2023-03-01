@@ -50,7 +50,7 @@ def main():
 
         # list of plants we can detect
         st.markdown("<h4  '>List of types we can identify</h4>", unsafe_allow_html=True)
-        st.write(nlp.pipe_labels['ner'])
+        #st.write(nlp.pipe_labels['ner'])
         lotti = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_srcvuh0h.json")
         st_lottie(
             lotti,
