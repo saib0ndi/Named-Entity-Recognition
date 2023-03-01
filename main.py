@@ -28,8 +28,8 @@ def main():
 
     if selected == "Home":
         st.markdown("<h1 style='text-align: center; color: #08e08a;'>Named Entity Recognition</h1>", unsafe_allow_html=True)
-        st.markdown("<h4 '>A web app to recognize the enitities in a given text</h4>", unsafe_allow_html=True)
-        lottie_hello = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_1plcwvk5.json")
+        st.markdown("<h4 '>A web app to recognize the enitities in a given input text</h4>", unsafe_allow_html=True)
+        lottie_hello = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_Q7WY7CfUco.json")
         st_lottie(
             lottie_hello,
             speed=1,
