@@ -66,7 +66,7 @@ def main():
 
     elif selected == "Entity Recognizer":
         st.markdown("<h1 style='text-align: center; color: #08e08a;'>Entity Recognizer</h1>", unsafe_allow_html=True)
-        lot = load_lottieurl('https://assets3.lottiefiles.com/packages/lf20_0xbu1xfo.json')
+        lot = load_lottieurl('https://assets8.lottiefiles.com/packages/lf20_4kji20Y93r.json')
         st_lottie(
             lot,
             speed=1,
