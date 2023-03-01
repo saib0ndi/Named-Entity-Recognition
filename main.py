@@ -4,7 +4,8 @@ import spacy
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 import requests
-
+from spacy.cli import download
+download("en_core_web_sm")
 
 nlp = spacy.load("en_core_web_sm")
 
