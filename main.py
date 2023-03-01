@@ -1,11 +1,12 @@
 # importing libraries
 import streamlit as st
-import nltk
+import spacy
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 import requests
 
-nltk.download('punkt')
+
+nlp = spacy.load("en_core_web_sm")
 
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -50,7 +51,7 @@ def main():
 
         # list of plants we can detect
         st.markdown("<h4  '>List of types we can identify</h4>", unsafe_allow_html=True)
-        #st.write(nlp.pipe_labels['ner'])
+        st.write(nlp.pipe_labels['ner'])
         lotti = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_srcvuh0h.json")
         st_lottie(
             lotti,
@@ -80,10 +81,8 @@ def main():
         )
         text = st.text_area("Enter the text to recognize entities")
         if st.button("Recognize"):
-            # using nltk to recognize entities
-            entities = nltk.chunk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(text)))
-            # printing the entities
-            st.write(entities)
+            doc = nlp(text)
+            st.write([(ent.text, ent.label_) for ent in doc.ents])
 
 if __name__ == "__main__":
     main()
