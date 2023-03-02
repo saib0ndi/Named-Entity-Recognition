@@ -9,6 +9,8 @@ download("en_core_web_sm")
 
 nlp = spacy.load("en_core_web_sm")
 
+st.write(en_core_web_sm.__file__)
+
 def load_lottieurl(url: str):
     r = requests.get(url)
     if r.status_code != 200:
