@@ -6,11 +6,11 @@ from streamlit_lottie import st_lottie
 import requests
 from spacy.cli import download
 
-if nlp = spacy.load("en_core_web_sm"):
-    pass
+if spacy.load("en_core_web_sm"):
+    nlp = spacy.load("en_core_web_sm")
 else:
     download("en_core_web_sm")
-    pass
+    nlp = spacy.load("en_core_web_sm")
 
 def load_lottieurl(url: str):
     r = requests.get(url)
