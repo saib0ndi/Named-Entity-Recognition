@@ -1,44 +1,59 @@
-import pickle
 import pandas as pd
 import numpy as np
 import streamlit as st
+import keras
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import json
 
-id2tag = {0: 'O',
- 1: 'B-corporation',
- 2: 'I-corporation',
- 3: 'B-creative-work',
- 4: 'I-creative-work',
- 5: 'B-group',
- 6: 'I-group',
- 7: 'B-location',
- 8: 'I-location',
- 9: 'B-person',
- 10: 'I-person',
- 11: 'B-product',
- 12: 'I-product'}
+tags = ['I-artifact',
+ 'I-person',
+ 'B-natural Phenomenon',
+ '--',
+ 'B-event',
+ 'I-geographic entity',
+ 'B-artifact',
+ 'I-natural Phenomenon',
+ 'B-person',
+ 'B-geographic entity',
+ 'I-event',
+ 'B-time indicator',
+ 'B-geopolitical entity',
+ 'B-organization',
+ 'I-time indicator',
+ 'I-geopolitical entity',
+ 'I-organization']
 
-tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))
-model = pickle.load(open('model.pkl', 'rb'))
+word_idx = json.load(open('word_idx.json', 'r'))
+model = keras.models.load_model('model.h5')
 
 def tag_sentence(text:str):
-    # convert our text to a  tokenized sequence
-    inputs = tokenizer(text, truncation=True, return_tensors="pt").to("cuda")
-    # get outputs
-    outputs = model(**inputs)
-    # convert to probabilities with softmax
-    probs = outputs[0][0].softmax(1)
-    # get the tags with the highest probability
-    word_tags = [(tokenizer.decode(inputs['input_ids'][0][i].item()), id2tag[tagid.item()]) 
-                  for i, tagid in enumerate (probs.argmax(axis=1))]
+    word_list = text.split(" ")
+    x_new = []
+    for word in word_list:
+        if word in word_idx:
+            x_new.append(word_idx[word])
+        else:
+            x_new.append(0)
 
-    return pd.DataFrame(word_tags, columns=['word', 'tag'])
+    x_new = pad_sequences([x_new], maxlen=50, padding='post')
+    y_pred = model.predict(x_new)
+    y_pred = np.argmax(y_pred, axis=-1)
+    y_pred = [tags[i] for i in y_pred[0]]
+    st.write("-" * 35)
+    word1 = []
+    pred1 = []
+    for word, pred in zip(word_list, y_pred):
+        word1.append(word)
+        pred1.append(pred)
+
+    df = pd.DataFrame({'Word':word1, 'Prediction':pred1})
+    st.write(df)
 
 def main():
     st.title("Named Entity Recognition")
     text = st.text_area("Enter Text")
     if st.button("Tag"):
-        output = tag_sentence(text)
-        st.table(output)
+        tag_sentence(text)
 
 if __name__ == '__main__':
     main()
