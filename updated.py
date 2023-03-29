@@ -47,7 +47,7 @@ def tag_sentence(text:str):
         pred1.append(pred)
 
     df = pd.DataFrame({'Word':word1, 'Prediction':pred1})
-    st.write(df)
+    st.dataframe(df)
 
 def main():
     st.title("Named Entity Recognition")
