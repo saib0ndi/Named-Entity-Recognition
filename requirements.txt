@@ -1,5 +1,8 @@
+keras==2.11.0
 numpy==1.24.2
 pandas==1.5.2
+spacy==3.0.9
 streamlit==1.12.2
-keras
-tensorflow
+streamlit_lottie==0.0.3
+streamlit_option_menu==0.3.2
+tensorflow==2.11.0
